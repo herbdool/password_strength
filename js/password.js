@@ -3,7 +3,7 @@
   /**
    * Attach handlers to evaluate the strength of any password fields.
    */
-  Drupal.behaviors.PasswordStrengthCheck = {
+  Backdrop.behaviors.PasswordStrengthCheck = {
     attach: function (context, settings) {
       $('input.password-field', context).once('password-strength-check', function () {
 
@@ -31,14 +31,14 @@
 
           e.stopImmediatePropagation();
 
-          request_data = { password: encodeURIComponent($self.val()), token: Drupal.settings.passwordStrength.token, uid: Drupal.settings.passwordStrength.uid };
+          request_data = { password: encodeURIComponent($self.val()), token: Backdrop.settings.passwordStrength.token, uid: Backdrop.settings.passwordStrength.uid };
           if (required_score) {
             request_data['password_score'] = required_score;
           }
 
           // Check password strength.
           $.post(
-            Drupal.settings.passwordStrength.secure_base_url + 'system/password-strength-check',
+            Backdrop.settings.passwordStrength.secure_base_url + 'system/password-strength-check',
             request_data,
             function(data) {
 
@@ -133,11 +133,11 @@
 
           if ($self.val()) {
             if ($self.val() === $('input.password-field').val()) {
-              $message.html(Drupal.t('Passwords match.'));
+              $message.html(Backdrop.t('Passwords match.'));
               $message.slideDown();
             }
             else {
-              $message.html(Drupal.t('Passwords do not match.'));
+              $message.html(Backdrop.t('Passwords do not match.'));
               $message.slideDown();
             }
           }
